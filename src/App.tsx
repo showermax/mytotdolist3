@@ -6,32 +6,38 @@ import {v1} from "uuid";
 
 function App() {
     const [tasks, setTasks] = useState([
-        {id: v1(), name: 'Initial task', isDone: false},
-        {id: v1(), name: 'Initial task1', isDone: false},
-        {id: v1(), name: 'Initial task2', isDone: false},
-        {id: v1(), name: 'Initial task3', isDone: false},
-        {id: v1(), name: 'Initial task4', isDone: false}
+        {id: v1(), name: 'Initial task', isDone: false, priority: 'Low'},
+        {id: v1(), name: 'Initial task1', isDone: false, priority: 'Low'},
+        {id: v1(), name: 'Initial task2', isDone: false, priority: 'Low'},
+        {id: v1(), name: 'Initial task3', isDone: false, priority: 'Low'},
+        {id: v1(), name: 'Initial task4', isDone: false, priority: 'Low'}
     ])
 
-  const statusChange = (id: string) => {
-      setTasks(tasks.map(el=> el.id === id ? el = {...el, isDone: !el.isDone} : el))
-  }
-  const addTask =(newTaskName: string)=>{
-        setTasks([...tasks, {id: v1(), name: newTaskName, isDone: false}])
-  }
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          All you need to get things done ver.3.0 beta
-        </p>
-      </header>
+    const statusChange = (id: string) => {
+        setTasks(tasks.map(el => el.id === id ? {...el, isDone: !el.isDone} : el))
+    }
 
-      <Todolist title='Inbox' tasks={tasks} statusChange={statusChange} addTask={addTask}/>
+    const priorityChange = (id: string, newpriority: string) => {
+        setTasks(tasks.map(el => el.id === id ? {...el, priority: newpriority} : el))
+    }
+    const addTask = (newTaskName: string) => {
+        setTasks([...tasks, {id: v1(), name: newTaskName, isDone: false, priority: 'Low priority'}])
+    }
+    console.log(tasks)
+    return (
+        <div className="App">
+            <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo"/>
+                <p>
+                    All you need to get things done ver.3.0 beta
+                </p>
+            </header>
 
-    </div>
-  );
+            <Todolist title='Inbox' tasks={tasks} statusChange={statusChange} addTask={addTask}
+                      priorityChange={priorityChange}/>
+
+        </div>
+    );
 }
 
 export default App;

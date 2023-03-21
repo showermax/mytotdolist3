@@ -62,6 +62,10 @@ button {
 {
   opacity: 1;
 }
+.todolist select {
+
+}
+
 .App-link {
   color: #61dafb;
 }
