@@ -23,7 +23,17 @@ button {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.main{
+  display: flex;
+
+}
+.isdone {
+  text-decoration: line-through;
+  opacity:0.5;
+}
 .todolist{
+  min-width: 300px;
+  text-align: center;
   display: inline-block;
   margin: 20px;
   padding: 5px;
@@ -66,7 +76,7 @@ button {
   opacity: 1;
 }
 .taskitem{
-  display: inline;
+  display: inline-flex;
 }
 .taskbuttons {
   margin-left: 30px;
