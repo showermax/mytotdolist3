@@ -20,8 +20,13 @@ function App() {
     const priorityChange = (id: string, newpriority: string) => {
         setTasks(tasks.map(el => el.id === id ? {...el, priority: newpriority} : el))
     }
-    const addTask = (newTaskName: string) => {
-        setTasks([...tasks, {id: v1(), name: newTaskName, isDone: false, priority: 'Low priority', today: false}])
+    const addTask = (newTaskName: string, t: string) => {
+        if (t==='Inbox') {
+            setTasks([...tasks, {id: v1(), name: newTaskName, isDone: false, priority: 'Low priority', today: false}])
+        }
+        if (t==='Today') {
+            setTasks([...tasks, {id: v1(), name: newTaskName, isDone: false, priority: 'Low priority', today: true}])
+        }
     }
     const deleteTask = (id: string) => {
         setTasks(tasks.filter(el => el.id !== id))
@@ -30,16 +35,17 @@ function App() {
     const moveTask = (id: string, td: boolean) => {
         setTasks(tasks.map(el => el.id === id ? {...el, today: !td} : el))
     }
-    let todayTasks = tasks.filter(el => el.today)
-    let inboxTasks = tasks.filter(el => !el.today)
+    let todayTasks = tasks.filter(el => el.today && !el.isDone)
+    let inboxTasks = tasks.filter(el => !el.today && !el.isDone)
 const changeFilter =(f:FilterType) =>{
         setFilter(f)
 }
     const filterTasks =(filter: FilterType)=>{
         //
         switch(filter){
-            case 'Done': return inboxTasks.filter(el=>el.isDone)
-            case 'To-do': return inboxTasks.filter(el=>!el.isDone)
+            case 'High': return inboxTasks.filter(el=>el.priority==='High')
+            case 'Normal': return inboxTasks.filter(el=>el.priority==='Normal')
+            case 'Low': return inboxTasks.filter(el=>el.priority==='Low')
             default: return inboxTasks
             }
     }
@@ -57,7 +63,7 @@ const changeFilter =(f:FilterType) =>{
                           priorityChange={priorityChange} deleteTask={deleteTask} moveTask={moveTask} changeFilter={changeFilter}/>
                 <Todolist title='Today' tasks={todayTasks} statusChange={statusChange} addTask={addTask}
                           priorityChange={priorityChange} deleteTask={deleteTask} moveTask={moveTask} changeFilter={()=> setFilter(filter)}/>
-                <Todolist title='Today' tasks={filterTasks('Done')} statusChange={statusChange} addTask={addTask}
+                <Todolist title='Done' tasks={tasks.filter(el=>el.isDone)} statusChange={statusChange} addTask={addTask}
                           priorityChange={priorityChange} deleteTask={deleteTask} moveTask={moveTask} changeFilter={()=> setFilter(filter)}/>
             </div>
         </div>

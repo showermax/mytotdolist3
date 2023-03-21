@@ -6,7 +6,7 @@ export type TodolistPropsType = {
     tasks: TaskType[]
     title: string
     statusChange: (id: string) => void
-    addTask: (s: string) => void
+    addTask: (s: string, t: string) => void
     priorityChange: (id: string, newpriority: string) => void
     deleteTask: (id: string) => void
     moveTask: (id: string, td: boolean) => void
@@ -22,7 +22,7 @@ export type TaskType = {
 }
 
 //export type PriorityType = 'High'| 'Normal' | 'Low'
-export type FilterType = 'All'| 'To-do' | 'Done'
+export type FilterType = 'All'|'High'| 'Normal' | 'Low'
 
 export function Todolist(props: TodolistPropsType) {
     const [newTaskName, setNewTaskName] = useState<string>('')
@@ -31,8 +31,8 @@ export function Todolist(props: TodolistPropsType) {
         props.statusChange(id)
     }
 
-    const addTaskButtonHandler = (s: string) => {
-        props.addTask(s)
+    const addTaskButtonHandler = (s: string, t: string) => {
+        props.addTask(s,t)
         setNewTaskName('')
     }
     const deleteTaskButtonHandler = (id: string) => {
@@ -49,7 +49,7 @@ export function Todolist(props: TodolistPropsType) {
             <div className='todolist-header'> {props.title}</div>
             <div className={'add-input'}>
                 <SuperInput placeholder={'Add your task...'} setContent={setNewTaskName} value={newTaskName}/>
-                <SuperButton title={'Add'} buttonCallback={() => addTaskButtonHandler(newTaskName)}/>
+                <SuperButton title={'Add'} buttonCallback={() => addTaskButtonHandler(newTaskName,props.title)}/>
             </div>
             <ul>
                 {props.tasks.map(el => {
@@ -81,11 +81,9 @@ export function Todolist(props: TodolistPropsType) {
             </ul>
             {props.title === 'Inbox' && <div className={'filterblock'}>
                 <SuperButton title={'All'} buttonCallback={() => filterTasksButtonHandler('All')}/>
-                <SuperButton title={'To-do'} buttonCallback={() => filterTasksButtonHandler('To-do')}/>
-                <SuperButton title={'Done'} buttonCallback={() => filterTasksButtonHandler('Done')}/>
-                {/*<button>All</button>*/}
-                {/*<button>To-do</button>*/}
-                {/*<button>Done</button>*/}
+                <SuperButton title={'High'} buttonCallback={() => filterTasksButtonHandler('High')}/>
+                <SuperButton title={'Normal'} buttonCallback={() => filterTasksButtonHandler('Normal')}/>
+                <SuperButton title={'Low'} buttonCallback={() => filterTasksButtonHandler('Low')}/>
             </div>
         }
 

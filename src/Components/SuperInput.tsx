@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 
 type InputPropsType = {
     placeholder: string
@@ -14,7 +14,7 @@ const SuperInput = (props: InputPropsType) => {
     }
 
     return (
-        <input placeholder={props.placeholder} onChange={onChangeHandler} value={props.value}/>
+        <input placeholder={props.placeholder} onChange={onChangeHandler} value={props.value} />
     );
 };
 
