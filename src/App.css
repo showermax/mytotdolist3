@@ -42,12 +42,14 @@ button {
   justify-content: space-between;
   text-align: left;
   align-items: center;
+  border-bottom: 1px solid transparent;
 }
 .todolist ul li:hover {
-  font-weight: bold;
+  border-bottom: 1px solid #61dafb;
 
 }
 .todolist ul li button {
+  margin-left: 5px;
   height: 20px;
   width:20px;
   display: inline-flex;
@@ -63,8 +65,15 @@ button {
 {
   opacity: 1;
 }
-.todolist select {
+.taskitem{
+  display: inline;
+}
+.taskbuttons {
+  margin-left: 30px;
+}
 
+.todolist select {
+  margin-left: 5px;
 }
 
 .App-link {

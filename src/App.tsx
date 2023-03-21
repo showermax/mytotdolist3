@@ -23,6 +23,9 @@ function App() {
     const addTask = (newTaskName: string) => {
         setTasks([...tasks, {id: v1(), name: newTaskName, isDone: false, priority: 'Low priority'}])
     }
+    const deleteTask = (id:string) => {
+        setTasks(tasks.filter(el=>el.id!==id))
+    }
     console.log(tasks)
     return (
         <div className="App">
@@ -34,7 +37,7 @@ function App() {
             </header>
 
             <Todolist title='Inbox' tasks={tasks} statusChange={statusChange} addTask={addTask}
-                      priorityChange={priorityChange}/>
+                      priorityChange={priorityChange} deleteTask={deleteTask}/>
 
         </div>
     );

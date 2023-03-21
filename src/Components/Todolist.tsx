@@ -7,7 +7,8 @@ export type TodolistPropsType = {
     title: string
     statusChange: (id: string) => void
     addTask: (s: string) => void
-    priorityChange:(id: string, newpriority: string)=> void
+    priorityChange: (id: string, newpriority: string) => void
+    deleteTask: (id: string)=>void
 }
 
 export type TaskType = {
@@ -16,6 +17,7 @@ export type TaskType = {
     isDone: boolean
     priority: string
 }
+
 //export type PriorityType = 'High'| 'Normal' | 'Low'
 
 export function Todolist(props: TodolistPropsType) {
@@ -29,6 +31,9 @@ export function Todolist(props: TodolistPropsType) {
         props.addTask(s)
         setNewTaskName('')
     }
+    const deleteTaskButtonHandler =(id: string)=>{
+        props.deleteTask(id)
+    }
 
     return (
         <div className='todolist'>
@@ -39,24 +44,28 @@ export function Todolist(props: TodolistPropsType) {
             </div>
             <ul>
                 {props.tasks.map(el => {
-                    const selectOnchangeHandler = (e: ChangeEvent<HTMLSelectElement>) =>{
-                    console.log(e.currentTarget.value)
+                    const selectOnchangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+                        console.log(e.currentTarget.value)
                         props.priorityChange(el.id, e.currentTarget.value)
+                    }
+                    return (
+                        <li key={el.id}>
+                            <div className={'taskitem'}>
+                                <input type={"checkbox"} checked={el.isDone}
+                                       onChange={() => checkboxOChangeHandler(el.id)}/>
+                                {el.name}
+                                <select onChange={selectOnchangeHandler} value={el.priority}>
+                                    <option> Normal</option>
+                                    <option> High</option>
+                                    <option> Low</option>
+                                </select>
+                            </div>
+                            <div className={'taskbuttons'}>
+                                <button>{'>'}</button>
+                                <SuperButton title={'X'} buttonCallback={() => deleteTaskButtonHandler(el.id)}/>
+                            </div>
+                        </li>)
                 }
-                return (
-                    <li key={el.id}>
-                        <div>
-                            <input type={"checkbox"} checked={el.isDone}
-                                   onChange={() => checkboxOChangeHandler(el.id)}/>
-                            {el.name}
-                            <select onChange={selectOnchangeHandler} value={el.priority}>
-                                <option> Normal </option>
-                                <option> High</option>
-                                <option> Low</option>
-                            </select>
-                        </div>
-                        <button>X</button>
-                    </li>)}
                 )}
             </ul>
             <div className={'filterblock'}>
