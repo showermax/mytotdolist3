@@ -12,7 +12,9 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+button {
+  border:none;
+}
 .App-header {
   background-color: #282c34;
   display: flex;
@@ -29,7 +31,37 @@
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 255, .2);
 }
+.todolist ul {
+  padding-left: 0rem;
+  list-style-type: none;
+}
+.todolist ul li {
+  height: 2rem;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  align-items: center;
+}
+.todolist ul li:hover {
+  font-weight: bold;
 
+}
+.todolist ul li button {
+  height: 20px;
+  width:20px;
+  display: inline-flex;
+  align-items: center;      /* отцентрировать*/
+  justify-content: center;
+  background-color: #61dafb;
+  border:none;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: 0.4s ease all;
+}
+.todolist ul li button:hover
+{
+  opacity: 1;
+}
 .App-link {
   color: #61dafb;
 }

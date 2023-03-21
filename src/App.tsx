@@ -16,8 +16,8 @@ function App() {
   const statusChange = (id: string) => {
       setTasks(tasks.map(el=> el.id === id ? el = {...el, isDone: !el.isDone} : el))
   }
-  const addTask =()=>{
-        setTasks([...tasks, {id: v1(), name: 'newName', isDone: false}])
+  const addTask =(newTaskName: string)=>{
+        setTasks([...tasks, {id: v1(), name: newTaskName, isDone: false}])
   }
   return (
     <div className="App">

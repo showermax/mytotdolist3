@@ -1,43 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SuperButton} from "./SuperButton";
+import SuperInput from "./SuperInput";
 
-export type TodolistPropsType  ={
+export type TodolistPropsType = {
     tasks: TaskType[]
     title: string
     statusChange: (id: string) => void
-    addTask:()=> void
+    addTask: (s: string) => void
 }
 
-export type TaskType ={
+export type TaskType = {
     id: string
     name: string
     isDone: boolean
 }
 
 export function Todolist(props: TodolistPropsType) {
-    const
+    const [newTaskName, setNewTaskName] = useState<string>('')
 
-    const checkboxOChangeHandler = (id: string)=>{
+    const checkboxOChangeHandler = (id: string) => {
         props.statusChange(id)
     }
-    const addTaskButtonHandler = ()=>{
-    props.addTask()
+
+    const addTaskButtonHandler = (s: string) => {
+        props.addTask(s)
+        setNewTaskName('')
     }
 
     return (
         <div className='todolist'>
             <div className='todolist-header'> {props.title}</div>
             <div className={'add-input'}>
-                <input/>
-               <SuperButton title={'Add'} buttonCallback={addTaskButtonHandler} />
+                <SuperInput placeholder={'Add your task...'} setContent={setNewTaskName} value={newTaskName}/>
+                <SuperButton title={'Add'} buttonCallback={() => addTaskButtonHandler(newTaskName)}/>
             </div>
             <ul>
                 {props.tasks.map(el =>
-                <li key = {el.id}>
-                    <input type={"checkbox"} checked={el.isDone} onChange={()=>checkboxOChangeHandler(el.id)}/>
-                    {el.name}
-                    <button>x</button>
-                </li>
+                    <li key={el.id}>
+                        <div>
+                            <input type={"checkbox"} checked={el.isDone}
+                                   onChange={() => checkboxOChangeHandler(el.id)}/>
+                            {el.name}
+                        </div>
+                        <button>X</button>
+                    </li>
                 )}
             </ul>
             <div className={'filterblock'}>
