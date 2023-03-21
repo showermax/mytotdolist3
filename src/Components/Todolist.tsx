@@ -49,10 +49,10 @@ export function Todolist(props: TodolistPropsType) {
                             <input type={"checkbox"} checked={el.isDone}
                                    onChange={() => checkboxOChangeHandler(el.id)}/>
                             {el.name}
-                            <select onChange={selectOnchangeHandler}>
-                                <option selected={el.priority === 'Normal'}> Normal </option>
-                                <option selected={el.priority === 'High'}> High</option>
-                                <option selected={el.priority === 'Low'}> Low</option>
+                            <select onChange={selectOnchangeHandler} value={el.priority}>
+                                <option> Normal </option>
+                                <option> High</option>
+                                <option> Low</option>
                             </select>
                         </div>
                         <button>X</button>

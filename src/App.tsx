@@ -8,7 +8,7 @@ function App() {
     const [tasks, setTasks] = useState([
         {id: v1(), name: 'Initial task', isDone: false, priority: 'Low'},
         {id: v1(), name: 'Initial task1', isDone: false, priority: 'Low'},
-        {id: v1(), name: 'Initial task2', isDone: false, priority: 'Low'},
+        {id: v1(), name: 'Initial task2', isDone: false, priority: 'High'},
         {id: v1(), name: 'Initial task3', isDone: false, priority: 'Low'},
         {id: v1(), name: 'Initial task4', isDone: false, priority: 'Low'}
     ])
